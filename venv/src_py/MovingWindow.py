@@ -12,12 +12,14 @@ class MovingWindow(object):
             lst_wndType (list): list of window types.
             wndSize (int): size of this moving window. e.g. 1*1, 3*3, 5*5, ...
             wndStpLnth (int): step length of this moving window.
+            imgPixelPosition (vector): Center coordinate of Moving Window on satellite image
     """
 
     lst_wndType = ['rectangle', 'circle']
     wndType = 'Did not defined!'
     wndSize = 3
     wndStpLnth = 0
+    imgPixelPosition = (0, 0)
 
     def __init__(self, wt, ws, wsl, img:RSimage):
         """ initialize class MovingWindow
@@ -51,9 +53,9 @@ class MovingWindow(object):
             self.img = img
 
 # test
-img = RSimage('../data/09AUG11PILOT.tif', 1)
-mw = MovingWindow('rectangle', 3, 0, img)
-mw.attribute
-mw.set_attribute('circle', 5, 3, img)
-mw.attribute
-print('aaa')
+# img = RSimage('../data/09AUG11PILOT.tif', 1)
+# mw = MovingWindow('rectangle', 3, 0, img)
+# mw.attribute
+# mw.set_attribute('circle', 5, 3, img)
+# mw.attribute
+# print('aaa')

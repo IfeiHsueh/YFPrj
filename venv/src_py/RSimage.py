@@ -105,11 +105,21 @@ class RSimage(object):
         else:
             raise ValueError('Do not have such band.')
 
-
+    def get_band(self, bandName):
+        '''
+        To get the specific band.
+        :param bandName: the name of the specific band. It should be in the list
+        lst_bandNames = ['red', 'nir', 'green', 'blue']
+        :return: matrix data of this band.
+        '''
+        if bandName in self.lst_bandNames:
+            return self.imgDict[bandName]
+        else:
+            raise  ValueError('Do not have such band.')
 
 # test
-img = RSimage('../data/09AUG11PILOT.tif', 1)
-img.attributes
-img.displayImage()
-img.displayBands()
-img.displayBand('nir')
+# img = RSimage('../data/09AUG11PILOT.tif', 1)
+# img.attributes
+# img.displayImage()
+# img.displayBands()
+# img.displayBand('nir')
