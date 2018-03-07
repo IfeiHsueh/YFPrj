@@ -19,7 +19,7 @@ class MovingWindow(object):
     wndType = 'Did not defined!'
     wndSize = 3
     wndStpLnth = 0
-    imgPixelPosition = (0, 0)
+    imgPixelPosition = [0, 0]
 
     def __init__(self, wt, ws, wsl, img:RSimage):
         """ initialize class MovingWindow
@@ -52,10 +52,34 @@ class MovingWindow(object):
             self.imgWnd = np.empty((ws, ws), np.uint16)
             self.img = img
 
+    # Get and set coordinate of Moving Window on satellite image
+    @property
+    def center(self):
+        """
+        To get center position of this window on satellite image
+        :return: coord
+        """
+        coord = self.imgPixelPosition
+        return coord
+
+    @center.setter
+    def center(self, imgPixelPosition):
+        """
+        To set center position of this window on satellite image
+        :param imgPixelPosition: This is a list contains to integers
+        :return: NULL
+        """
+        self.imgPixelPosition[0] = imgPixelPosition[0]
+        self.imgPixelPosition[1] = imgPixelPosition[1]
+
 # test
-# img = RSimage('../data/09AUG11PILOT.tif', 1)
-# mw = MovingWindow('rectangle', 3, 0, img)
+img = RSimage('../data/09AUG11PILOT.tif', 1)
+mw = MovingWindow('rectangle', 3, 0, img)
 # mw.attribute
 # mw.set_attribute('circle', 5, 3, img)
 # mw.attribute
 # print('aaa')
+print(mw.center)
+coord = [1, 1]
+mw.center = coord
+print(mw.center)

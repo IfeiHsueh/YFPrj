@@ -74,10 +74,15 @@ class RSimage(object):
     #         self.imgDict[bandName] = bandData
     #     else:
     #         raise ValueError('Do not have such band.')
-    def bandData(self, bandData):
-        bandName = 'red'
+    def bandData(self, bandinfo):
+        """
+        To set band information of selected band of satellite image
+        :param bandinfo: list. contains a string of band name and matrix of band data
+        :return:
+        """
+        bandName = bandinfo[0]
         if bandName in self.lst_bandNames:
-            self.imgDict[bandName] = bandData
+            self.imgDict[bandName] = bandinfo[1]
         else:
             raise ValueError('Do not have such band.')
 
@@ -118,8 +123,12 @@ class RSimage(object):
             raise  ValueError('Do not have such band.')
 
 # test
-# img = RSimage('../data/09AUG11PILOT.tif', 1)
-# img.attributes
+img = RSimage('../data/09AUG11PILOT.tif', 1)
+img.attributes
 # img.displayImage()
 # img.displayBands()
 # img.displayBand('nir')
+# img2 = RSimage('../data/09AUG11PILOT.tif', 1)
+# band2 = img2.get_band('nir')
+# img.bandData = ['red', band2]
+# img.displayBands()
