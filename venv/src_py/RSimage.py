@@ -37,6 +37,8 @@ class RSimage(object):
         self.imgDict[self.lst_bandNames[1]] = self.data[1]
         self.imgDict[self.lst_bandNames[2]] = self.data[2]
         self.imgDict[self.lst_bandNames[3]] = self.data[3]
+        self.imgWidth = self.imgDict[self.lst_bandNames[0]].shape[0]
+        self.imgHeight = selfimgDict[self.lst_bandNames[0]].shape[1]
 
     def __set_name__(self, owner, name):
         self.owner = owner
