@@ -1,6 +1,7 @@
 from RSimage import RSimage
 import numpy as np
 
+
 class MovingWindow(object):
     """
         'Moving window for satellite image'
@@ -21,7 +22,7 @@ class MovingWindow(object):
     wndStpLnth = 0
     imgPixelPosition = [0, 0]
 
-    def __init__(self, wt, ws, wsl, img:RSimage):
+    def __init__(self, wt, ws, wsl, img: RSimage):
         """ initialize class MovingWindow
 
         :param wt: window type. Types in lst_wndType. e.g. 'rectangle'.
@@ -44,7 +45,7 @@ class MovingWindow(object):
         print('Window Step Length: ', self.wndStpLnth)
 
     # @attribute.setter
-    def set_attribute(self, wt:str, ws:int, wsl:int, img:RSimage):
+    def set_attribute(self, wt: str, ws: int, wsl: int, img: RSimage):
         if wt in self.lst_wndType:
             self.wndType = wt
             self.wndSize = ws
@@ -52,7 +53,34 @@ class MovingWindow(object):
             self.imgWnd = np.empty((ws, ws), np.uint16)
             self.img = img
 
-    # Get and set coordinate of Moving Window on satellite image
+    # Getter and setter window type of Moving Window on satellite image
+    @property
+    def wndtype(self):
+        return self.wndType
+
+    @wndtype.setter
+    def wndtype(self, type_str):
+        self.wndType = type_str
+
+    # Getter and setter window size of Moving Window on satellite image
+    @property
+    def wndsize(self):
+        return self.wndSize
+
+    @wndsize.setter
+    def wndsize(self, size_int):
+        self.wndSize = size_int
+
+    # Getter and setter window size of Moving Window on satellite image
+    @property
+    def wndstplnth(self):
+        return self.wndStpLnth
+
+    @wndstplnth.setter
+    def wndstplnth(self, length_int):
+        self.wndStpLnth = length_int
+
+    # Getter and setter coordinate of Moving Window on satellite image
     @property
     def center(self):
         """
@@ -71,6 +99,7 @@ class MovingWindow(object):
         """
         self.imgPixelPosition[0] = imgPixelPosition[0]
         self.imgPixelPosition[1] = imgPixelPosition[1]
+
 
 # test
 img = RSimage('../data/09AUG11PILOT.tif', 1)

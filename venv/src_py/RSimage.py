@@ -38,7 +38,7 @@ class RSimage(object):
         self.imgDict[self.lst_bandNames[2]] = self.data[2]
         self.imgDict[self.lst_bandNames[3]] = self.data[3]
         self.imgWidth = self.imgDict[self.lst_bandNames[0]].shape[0]
-        self.imgHeight = selfimgDict[self.lst_bandNames[0]].shape[1]
+        self.imgHeight = self.imgDict[self.lst_bandNames[0]].shape[1]
 
     def __set_name__(self, owner, name):
         self.owner = owner
@@ -124,13 +124,17 @@ class RSimage(object):
         else:
             raise  ValueError('Do not have such band.')
 
-# test
-img = RSimage('../data/09AUG11PILOT.tif', 1)
-img.attributes
-# img.displayImage()
-# img.displayBands()
-# img.displayBand('nir')
-# img2 = RSimage('../data/09AUG11PILOT.tif', 1)
-# band2 = img2.get_band('nir')
-# img.bandData = ['red', band2]
-# img.displayBands()
+def main():
+    # test
+    img = RSimage('../data/09AUG11PILOT.tif', 1)
+    img.attributes
+    # img.displayImage()
+    # img.displayBands()
+    # img.displayBand('nir')
+    # img2 = RSimage('../data/09AUG11PILOT.tif', 1)
+    # band2 = img2.get_band('nir')
+    # img.bandData = ['red', band2]
+    # img.displayBands()
+
+if __name__ == '__main__':
+    main()
