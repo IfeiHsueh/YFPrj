@@ -128,8 +128,8 @@ def main():
     # test
     img = RSimage('../data/09AUG11PILOT.tif', 1)
     img.attributes
-    # img.displayImage()
-    # img.displayBands()
+    img.displayImage()
+    img.displayBands()
     # img.displayBand('nir')
     # img2 = RSimage('../data/09AUG11PILOT.tif', 1)
     # band2 = img2.get_band('nir')

@@ -7,4 +7,3 @@ from MovingWindow import MovingWindow
 img = RSimage('../data/09AUG11PILOT.tif', 1)
 mw = MovingWindow('rectangle', 3, 0, img)
 print('aaa')
-print('bbb')
