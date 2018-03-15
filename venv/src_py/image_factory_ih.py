@@ -7,9 +7,13 @@ from MovingWindow import MovingWindow
 class ImageFactory(object):
 
     def __init__(self, image:RSimage, movingwindow):
+        """ initialize class ImageFactory
+
+        :param image:
+        :param movingwindow:
+        """
         self.__image = image
         self.__movingwindow = movingwindow
-        self.__width = image
         self.__coords = [0, 0]
 
     # Setter and Getter of target image
@@ -18,8 +22,8 @@ class ImageFactory(object):
         return self.__image
 
     @image.setter
-    def image(self, imageData):
-        self.__image = imageData
+    def image(self, imagedata):
+        self.__image = imagedata
 
     # Setter and Getter of moving window
     @property
@@ -41,10 +45,19 @@ class ImageFactory(object):
         :return:
         """
         if self.__movingwindow.wndtype == 'rectangle':
-            print('ok!')
-            wnd = self.movingwindow
-            img = self.image
-            imgsize = self.imgsize
+            wnd = self.__movingwindow
+            img = self.__image
+            imgsize = img.imgSize
             print(imgsize)
         else:
             print('Did not defined. More codes are required here!')
+
+def main():
+    # test
+    img = RSimage('../data/09AUG11PILOT.tif', 1)
+    mw = MovingWindow('rectangle', 3, 0, img)
+    imf = ImageFactory(img, mw)
+    imf.execute_mwindow()
+
+if __name__ == '__main__':
+    main()

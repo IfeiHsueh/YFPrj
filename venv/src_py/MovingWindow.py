@@ -101,14 +101,18 @@ class MovingWindow(object):
         self.imgPixelPosition[1] = imgPixelPosition[1]
 
 
-# test
-img = RSimage('../data/09AUG11PILOT.tif', 1)
-mw = MovingWindow('rectangle', 3, 0, img)
-# mw.attribute
-# mw.set_attribute('circle', 5, 3, img)
-# mw.attribute
-# print('aaa')
-print(mw.center)
-coord = [1, 1]
-mw.center = coord
-print(mw.center)
+def main():
+    # test
+    img = RSimage('../data/09AUG11PILOT.tif', 1)
+    mw = MovingWindow('rectangle', 3, 0, img)
+    # mw.attribute
+    # mw.set_attribute('circle', 5, 3, img)
+    # mw.attribute
+    # print('aaa')
+    print(mw.center)
+    coord = [1, 1]
+    mw.center = coord
+    print(mw.center)
+
+if __name__ == '__main__':
+    main()
