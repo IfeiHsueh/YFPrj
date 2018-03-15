@@ -4,17 +4,24 @@ This python file is to store image factory
 from RSimage import RSimage
 from MovingWindow import MovingWindow
 
-class ImageFactory(object):
 
-    def __init__(self, image:RSimage, movingwindow):
+class ImageFactory(object):
+    __coords = [[0, 0],
+                     [0, 0]]
+
+    def __init__(self, image: RSimage, movingwindow, coords):
         """ initialize class ImageFactory
 
-        :param image:
-        :param movingwindow:
+        :param image: satellite image to be used
+        :param movingwindow: the moving window, which will be applied on the imagery
         """
         self.__image = image
         self.__movingwindow = movingwindow
-        self.__coords = [0, 0]
+        if not coords:
+            # coords is empty
+            coords = [[0, 0],
+                      [0, 0]]
+        self.__coords = coords
 
     # Setter and Getter of target image
     @property
@@ -39,6 +46,23 @@ class ImageFactory(object):
         """
         self.__movingwindow = movingwindow
 
+    # Getter, setter and deleter of coordinates
+    @property
+    def coords(self):
+        return self.__coords
+
+    @coords.setter
+    def coords(self, coords):
+        self.__coords = coords
+
+    @coords.deleter
+    def coords(self):
+        del self.__coords
+        self.__coords = [[0, 0],
+                         [0, 0]]
+        print('Coordinates of targets are reset.')
+
+
     def execute_mwindow(self):
         """
         run moving window on this image
@@ -52,12 +76,17 @@ class ImageFactory(object):
         else:
             print('Did not defined. More codes are required here!')
 
+
 def main():
     # test
     img = RSimage('../data/09AUG11PILOT.tif', 1)
     mw = MovingWindow('rectangle', 3, 0, img)
-    imf = ImageFactory(img, mw)
+    coords = [[0, 0],
+              [0, 0]]
+    imf = ImageFactory(img, mw, coords)
+    del imf.coords
     imf.execute_mwindow()
+
 
 if __name__ == '__main__':
     main()
