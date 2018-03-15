@@ -8,5 +8,6 @@ img = RSimage('../data/09AUG11PILOT.tif', 1)
 mw = MovingWindow('rectangle', 3, 0, img)
 print('aaa')
 print('bbb')
+print('ccc')
 imf = ImageFactory(img, mw)
 imf.mwindow
