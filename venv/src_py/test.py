@@ -9,5 +9,6 @@ mw = MovingWindow('rectangle', 3, 0, img)
 print('aaa')
 print('bbb')
 print('ccc')
+print('ddd')
 imf = ImageFactory(img, mw)
 imf.mwindow
