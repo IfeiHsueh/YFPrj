@@ -42,5 +42,9 @@ class ImageFactory(object):
         """
         if self.__movingwindow.wndtype == 'rectangle':
             print('ok!')
+            wnd = self.movingwindow
+            img = self.image
+            imgsize = self.imgsize
+            print(imgsize)
         else:
             print('Did not defined. More codes are required here!')

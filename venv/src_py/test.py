@@ -7,3 +7,5 @@ from MovingWindow import MovingWindow
 img = RSimage('../data/09AUG11PILOT.tif', 1)
 mw = MovingWindow('rectangle', 3, 0, img)
 print('aaa')
+imf = ImageFactory(img, mw)
+imf.mwindow

@@ -39,6 +39,7 @@ class RSimage(object):
         self.imgDict[self.lst_bandNames[3]] = self.data[3]
         self.imgWidth = self.imgDict[self.lst_bandNames[0]].shape[0]
         self.imgHeight = self.imgDict[self.lst_bandNames[0]].shape[1]
+        self.imgSizeXY = [self.imgWidth, self.imgHeight]
 
     def __set_name__(self, owner, name):
         self.owner = owner
@@ -55,13 +56,7 @@ class RSimage(object):
         self.imageName = imageName
         self.imageDir = imageDir
 
-    #   Getter and setter for bandData
-    # @property
-    # def bandData(self, bandName):
-    #     if bandName in self.lst_bandNames:
-    #         return self.imgDict[bandName]
-    #     else:
-    #         raise ValueError('Do not have such band.')
+    # Getter and setter for bandData
     @property
     def bandData(self):
         bandName = 'nir'
@@ -71,11 +66,6 @@ class RSimage(object):
             raise ValueError('Do not have such band.')
 
     @bandData.setter
-    # def bandData(self, bandName, bandData):
-    #     if bandName in self.lst_bandNames:
-    #         self.imgDict[bandName] = bandData
-    #     else:
-    #         raise ValueError('Do not have such band.')
     def bandData(self, bandinfo):
         """
         To set band information of selected band of satellite image
@@ -123,6 +113,20 @@ class RSimage(object):
             return self.imgDict[bandName]
         else:
             raise  ValueError('Do not have such band.')
+
+    # Getter and setter for imgSize
+    @property
+    def imgSize(self):
+        return self.imgSizeXY
+
+    @imgSize.setter
+    def imgSize(self, imgSizeXY):
+        """
+        To set width and height of this image.
+        :param imgSizeXY: a list contains width and height of this image.
+        :return:
+        """
+        self.imgSizeXY = imgSizeXY
 
 def main():
     # test
