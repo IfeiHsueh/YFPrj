@@ -62,17 +62,32 @@ class ImageFactory(object):
                          [0, 0]]
         print('Coordinates of targets are reset.')
 
+    # Add a input into list __coords
+    def addcoord(self):
+        pass
 
     def execute_mwindow(self):
         """
         run moving window on this image
         :return:
         """
+        wnd = self.__movingwindow
+        img = self.__image
+        imgsize = img.imgSize
+        coords = self.__coords
+        size_coords = len(coords)
+
+        print(imgsize)
         if self.__movingwindow.wndtype == 'rectangle':
-            wnd = self.__movingwindow
-            img = self.__image
-            imgsize = img.imgSize
-            print(imgsize)
+            for i in range(0,size_coords):
+                xcoord = coords[i][0]
+                ycoord = coords[i][1]
+                if (xcoord - wnd.wndsize + 1) >= 0 and (ycoord - wnd.wndsize + 1) >= 0:
+                    wnd.center = [xcoord, ycoord]
+                    
+                else:
+                    print('Out of boundary!')
+                    return
         else:
             print('Did not defined. More codes are required here!')
 
@@ -81,10 +96,10 @@ def main():
     # test
     img = RSimage('../data/09AUG11PILOT.tif', 1)
     mw = MovingWindow('rectangle', 3, 0, img)
-    coords = [[0, 0],
-              [0, 0]]
+    coords = [[2, 3],
+              [4, 5]]
     imf = ImageFactory(img, mw, coords)
-    del imf.coords
+    #del imf.coords
     imf.execute_mwindow()
 
 

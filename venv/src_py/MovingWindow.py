@@ -16,11 +16,11 @@ class MovingWindow(object):
             imgPixelPosition (vector): Center coordinate of Moving Window on satellite image
     """
 
-    lst_wndType = ['rectangle', 'circle']
-    wndType = 'Did not defined!'
-    wndSize = 3
-    wndStpLnth = 0
-    imgPixelPosition = [0, 0]
+    __lst_wndType = ['rectangle', 'circle']
+    __wndType = 'Did not defined!'
+    __wndSize = 3
+    __wndStpLnth = 0
+    __imgPixelPosition = [0, 0]
 
     def __init__(self, wt, ws, wsl, img: RSimage):
         """ initialize class MovingWindow
@@ -30,55 +30,55 @@ class MovingWindow(object):
         :param wsl: window step length. To define how many pixels to move each time.
         :param img (RSimage): the satellite image to be scanned.
         """
-        if wt in self.lst_wndType:
-            self.wndType = wt
-            self.wndSize = ws
-            self.wndStpLnth = wsl
-            self.imgWnd = np.empty((ws, ws), np.uint16)
-            self.img = img
+        if wt in self.__lst_wndType:
+            self.__wndType = wt
+            self.__wndSize = ws
+            self.__wndStpLnth = wsl
+            self.__imgWnd = np.empty((ws, ws), np.uint16)
+            self.__img = img
 
     # Getter and setter for
     @property
     def attribute(self):
-        print('Window Type: ', self.wndType)
-        print('Window Size: ', self.wndSize)
-        print('Window Step Length: ', self.wndStpLnth)
+        print('Window Type: ', self.__wndType)
+        print('Window Size: ', self.__wndSize)
+        print('Window Step Length: ', self.__wndStpLnth)
 
     # @attribute.setter
     def set_attribute(self, wt: str, ws: int, wsl: int, img: RSimage):
-        if wt in self.lst_wndType:
-            self.wndType = wt
-            self.wndSize = ws
-            self.wndStpLnth = wsl
-            self.imgWnd = np.empty((ws, ws), np.uint16)
-            self.img = img
+        if wt in self.__lst_wndType:
+            self.__wndType = wt
+            self.__wndSize = ws
+            self.__wndStpLnth = wsl
+            self.__imgWnd = np.empty((ws, ws), np.uint16)
+            self.__img = img
 
     # Getter and setter window type of Moving Window on satellite image
     @property
     def wndtype(self):
-        return self.wndType
+        return self.__wndType
 
     @wndtype.setter
     def wndtype(self, type_str):
-        self.wndType = type_str
+        self.__wndType = type_str
 
     # Getter and setter window size of Moving Window on satellite image
     @property
     def wndsize(self):
-        return self.wndSize
+        return self.__wndSize
 
     @wndsize.setter
     def wndsize(self, size_int):
-        self.wndSize = size_int
+        self.__wndSize = size_int
 
     # Getter and setter window size of Moving Window on satellite image
     @property
     def wndstplnth(self):
-        return self.wndStpLnth
+        return self.__wndStpLnth
 
     @wndstplnth.setter
     def wndstplnth(self, length_int):
-        self.wndStpLnth = length_int
+        self.__wndStpLnth = length_int
 
     # Getter and setter coordinate of Moving Window on satellite image
     @property
@@ -87,7 +87,7 @@ class MovingWindow(object):
         To get center position of this window on satellite image
         :return: coord
         """
-        coord = self.imgPixelPosition
+        coord = self.__imgPixelPosition
         return coord
 
     @center.setter
@@ -97,8 +97,8 @@ class MovingWindow(object):
         :param imgPixelPosition: This is a list contains to integers
         :return: NULL
         """
-        self.imgPixelPosition[0] = imgPixelPosition[0]
-        self.imgPixelPosition[1] = imgPixelPosition[1]
+        self.__imgPixelPosition[0] = imgPixelPosition[0]
+        self.__imgPixelPosition[1] = imgPixelPosition[1]
 
 
 def main():
@@ -113,6 +113,7 @@ def main():
     coord = [1, 1]
     mw.center = coord
     print(mw.center)
+
 
 if __name__ == '__main__':
     main()
