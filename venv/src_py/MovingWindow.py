@@ -19,7 +19,12 @@ class MovingWindow(object):
     __lst_wndType = ['rectangle', 'circle']
     __wndType = 'Did not defined!'
     __wndSize = 3
+    __wndRadius = 1
     __wndStpLnth = 0
+    __wndImg = [[[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+                [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+                [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+                [[0, 0, 0], [0, 0, 0], [0, 0, 0]]]
     __imgPixelPosition = [0, 0]
 
     def __init__(self, wt, ws, wsl, img: RSimage):
@@ -33,6 +38,7 @@ class MovingWindow(object):
         if wt in self.__lst_wndType:
             self.__wndType = wt
             self.__wndSize = ws
+            self.__wndRadius = (self.__wndSize-1)/2
             self.__wndStpLnth = wsl
             self.__imgWnd = np.empty((ws, ws), np.uint16)
             self.__img = img
@@ -70,6 +76,21 @@ class MovingWindow(object):
     @wndsize.setter
     def wndsize(self, size_int):
         self.__wndSize = size_int
+
+    # Getter, setter and deleter of the parameter "__wndRadius" (window radius)
+    @property
+    def wndradius(self):
+        return self.wndRadius
+
+    @wndradius.setter
+    def wndradius(self, wndRadius):
+        self.__wndRadius = wndRadius
+
+    @wndradius.deleter
+    def wndradius(self):
+        del self.__wndRadius
+        self.__wndRadius = (self.__wndSize-1)/2
+        print('Moving window radius are reset.')
 
     # Getter and setter window size of Moving Window on satellite image
     @property

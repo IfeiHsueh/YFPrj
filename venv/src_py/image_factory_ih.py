@@ -68,7 +68,7 @@ class ImageFactory(object):
 
     def execute_mwindow(self):
         """
-        run moving window on this image
+        run moving window on this image.
         :return:
         """
         wnd = self.__movingwindow
@@ -78,13 +78,14 @@ class ImageFactory(object):
         size_coords = len(coords)
 
         print(imgsize)
-        if self.__movingwindow.wndtype == 'rectangle':
+        if wnd.wndtype == 'rectangle':
             for i in range(0,size_coords):
                 xcoord = coords[i][0]
                 ycoord = coords[i][1]
                 if (xcoord - wnd.wndsize + 1) >= 0 and (ycoord - wnd.wndsize + 1) >= 0:
+                    # to check if the moving window is out of image boundary
                     wnd.center = [xcoord, ycoord]
-                    
+
                 else:
                     print('Out of boundary!')
                     return

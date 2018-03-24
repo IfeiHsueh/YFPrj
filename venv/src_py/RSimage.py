@@ -18,50 +18,51 @@ class RSimage(object):
         imgDict (dictionary): dictionary of image bands.
     """
 
-    owner = 'Not Defined'
-    imageName = 'Not Defined'
-    imageDir = 'Not indicated'
-    type = 0
-    lst_bandNames = ['red', 'nir', 'green', 'blue']
-    band1 = np.empty((2000, 2000), np.uint16)
-    band2 = np.empty((2000, 2000), np.uint16)
-    band3 = np.empty((2000, 2000), np.uint16)
-    band4 = np.empty((2000, 2000), np.uint16)
-    imgDict = {lst_bandNames[0]: band1, lst_bandNames[1]: band2, lst_bandNames[2]: band3, lst_bandNames[3]: band4}
+    __owner = 'Not Defined'
+    __imageName = 'Not Defined'
+    __imageDir = 'Not indicated'
+    __type = 0
+    __lst_bandNames = ['red', 'nir', 'green', 'blue']
+    __band1 = np.empty((2000, 2000), np.uint16)
+    __band2 = np.empty((2000, 2000), np.uint16)
+    __band3 = np.empty((2000, 2000), np.uint16)
+    __band4 = np.empty((2000, 2000), np.uint16)
+    __imgDict = {__lst_bandNames[0]: __band1, __lst_bandNames[1]: __band2, __lst_bandNames[2]: __band3, __lst_bandNames[3]: __band4}
 
     def __init__(self, imageDir, type):
-        self.imageDir = imageDir
-        self.type = type
-        self.data = tifffile.imread(imageDir)
-        self.imgDict[self.lst_bandNames[0]] = self.data[0]
-        self.imgDict[self.lst_bandNames[1]] = self.data[1]
-        self.imgDict[self.lst_bandNames[2]] = self.data[2]
-        self.imgDict[self.lst_bandNames[3]] = self.data[3]
-        self.imgWidth = self.imgDict[self.lst_bandNames[0]].shape[0]
-        self.imgHeight = self.imgDict[self.lst_bandNames[0]].shape[1]
-        self.imgSizeXY = [self.imgWidth, self.imgHeight]
+        self.__imageDir = imageDir
+        self.__type = type
+        self.__data = tifffile.imread(imageDir)
+        self.__imgDict[self.__lst_bandNames[0]] = self.__data[0]
+        self.__imgDict[self.__lst_bandNames[1]] = self.__data[1]
+        self.__imgDict[self.__lst_bandNames[2]] = self.__data[2]
+        self.__imgDict[self.__lst_bandNames[3]] = self.__data[3]
+        self.__imgWidth = self.__imgDict[self.__lst_bandNames[0]].shape[0]
+        self.__imgHeight = self.__imgDict[self.__lst_bandNames[0]].shape[1]
+        self.__imgSizeXY = [self.__imgWidth, self.__imgHeight]
 
     def __set_name__(self, owner, name):
-        self.owner = owner
-        self.imageName = name
+        self.__owner = owner
+        self.__imageName = name
 
     #   Getter and setter for attributes
     @property
     def attributes(self):
-        print(self.imageName)
-        print(self.imageDir)
+        print(self.__imageName)
+        print(self.__imageDir)
 
     @attributes.setter
     def attributes(self, imageName, imageDir):
-        self.imageName = imageName
-        self.imageDir = imageDir
+        self.__imageName = imageName
+        self.__imageDir = imageDir
 
     # Getter and setter for bandData
     @property
     def bandData(self):
         bandName = 'nir'
-        if bandName in self.lst_bandNames:
-            return self.imgDict[bandName]
+        # TODO(iflyhsueh@hotmail.com): Need to be modified. The formal edition should not be written like this.
+        if bandName in self.__lst_bandNames:
+            return self.__imgDict[bandName]
         else:
             raise ValueError('Do not have such band.')
 
@@ -73,31 +74,31 @@ class RSimage(object):
         :return:
         """
         bandName = bandinfo[0]
-        if bandName in self.lst_bandNames:
-            self.imgDict[bandName] = bandinfo[1]
+        if bandName in self.__lst_bandNames:
+            self.__imgDict[bandName] = bandinfo[1]
         else:
             raise ValueError('Do not have such band.')
 
     def displayImage(self):
-        tifffile.imshow(self.data)
+        tifffile.imshow(self.__data)
         plt.show()
 
     def displayBands(self):
         plt.figure()
         plt.subplot(2, 2, 1)
-        plt.imshow(self.imgDict['red'])
+        plt.imshow(self.__imgDict['red'])
         plt.subplot(2, 2, 2)
-        plt.imshow(self.imgDict['nir'])
+        plt.imshow(self.__imgDict['nir'])
         plt.subplot(2, 2, 3)
-        plt.imshow(self.imgDict['green'])
+        plt.imshow(self.__imgDict['green'])
         plt.subplot(2, 2, 4)
-        plt.imshow(self.imgDict['blue'])
+        plt.imshow(self.__imgDict['blue'])
         plt.show()
 
     def displayBand(self, bandName):
-        if bandName in self.lst_bandNames:
+        if bandName in self.__lst_bandNames:
             plt.figure()
-            plt.imshow(self.imgDict[bandName])
+            plt.imshow(self.__imgDict[bandName])
             plt.show()
         else:
             raise ValueError('Do not have such band.')
@@ -109,15 +110,15 @@ class RSimage(object):
         lst_bandNames = ['red', 'nir', 'green', 'blue']
         :return: matrix data of this band.
         '''
-        if bandName in self.lst_bandNames:
-            return self.imgDict[bandName]
+        if bandName in self.__lst_bandNames:
+            return self.__imgDict[bandName]
         else:
             raise  ValueError('Do not have such band.')
 
     # Getter and setter for imgSize
     @property
     def imgSize(self):
-        return self.imgSizeXY
+        return self.__imgSizeXY
 
     @imgSize.setter
     def imgSize(self, imgSizeXY):
@@ -126,11 +127,15 @@ class RSimage(object):
         :param imgSizeXY: a list contains width and height of this image.
         :return:
         """
-        self.imgSizeXY = imgSizeXY
+        self.__imgSizeXY = imgSizeXY
 
 def main():
     # test
     img = RSimage('../data/09AUG11PILOT.tif', 1)
+    # img = [[[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+    #        [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+    #        [[0, 0, 0], [0, 0, 0], [0, 0, 0]],
+    #        [[0, 0, 0], [0, 0, 0], [0, 0, 0]]]
     img.attributes
     img.displayImage()
     img.displayBands()
